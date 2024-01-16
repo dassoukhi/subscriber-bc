@@ -58,3 +58,9 @@ Execution de tests avec maven
 - Masquer les attributs qui ne sont pas nécessaires pour une requête donnée. Ce qui permet de diminuer la taille du chargement des données.
 
 **Résilier =>** avec mail en Paramètre au lieu de l'ID pour plus de cohérence
+
+**mailChecker et phoneChecker** Vérifie si un abonné existe déjà en fonction de l'e-mail ou du téléphone avant creation ou mise à jour des donnnées personnelles.
+
+**création d'un abonné:** L'attribut isActiv n'est pas envoyé par la requete, l'attributtion se fait à la contruction de l'objet par le Service
+
+**le EndPoint Subscribers:** Récupère la liste des abonnés actifs donc inutile de renvoyer l'attribut isActiv
