@@ -20,7 +20,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class SubscriberController {
     @Autowired
-    private final SubscriberService subscriberService;
+    private SubscriberService subscriberService;
+
+    public SubscriberController() {
+    }
 
     public SubscriberController(SubscriberService subscriberService) {
         this.subscriberService = subscriberService;
@@ -43,6 +46,7 @@ public class SubscriberController {
     @GetMapping("subscriber/get/mail/{mail}")
     public ResponseEntity<SubscriberDto> getSubscriberByMail(@PathVariable("mail") String mail){
         SubscriberDto subscriberDto = this.subscriberService.getSubscriberByMail(mail);
+        if (subscriberDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(subscriberDto);
     }
     @GetMapping("subscriber/get/firstName/{firstName}")
@@ -60,13 +64,13 @@ public class SubscriberController {
         SubscriberDto subscriberDto = this.subscriberService.getSubscriberByPhone(phone);
         return ResponseEntity.ok(subscriberDto);
     }
-    @PostMapping("/unsubscribe")
+    @PutMapping("/unsubscribe")
     public ResponseEntity<Subscriber> unsubscribe(@RequestParam String mail){
         if (!this.subscriberService.mailChecker(mail)) throw new ResponseStatusException(HttpStatus.CONFLICT, "This subscriber is not exists");
         Subscriber subscriber = this.subscriberService.unsubscribe(mail);
         return ResponseEntity.ok(subscriber);
     }
-    @PutMapping("subscriber/update")
+    @PatchMapping("subscriber/update")
     public ResponseEntity<SubscriberDto> updateSubscribe(@RequestBody Subscriber subscriber){
         SubscriberDto subscriberDto = this.subscriberService.updateSubscriber(subscriber);
         return ResponseEntity.ok(subscriberDto);

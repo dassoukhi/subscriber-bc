@@ -36,29 +36,31 @@ public class SubscriberService {
         return subscribers.stream().map(subscriber -> this.modelMapper.map(subscriber, SubscriberDto.class)).collect(Collectors.toList());
     }
     public SubscriberDto getSubscriberByMail(String mail) {
-        Subscriber subscriber = subscriberRepository.findOneByMail(mail).get();
+        Subscriber subscriber = subscriberRepository.findOneByMail(mail).orElse(null);
+        if (subscriber == null) return null;
         return this.modelMapper.map(subscriber, SubscriberDto.class);
     }
 
     public SubscriberDto getSubscriberByFirstName(String firstName) {
-        Subscriber subscriber = subscriberRepository.findOneByFirstName(firstName).get();
-        System.out.println(subscriber);
+        Subscriber subscriber = subscriberRepository.findOneByFirstName(firstName).orElse(null);
+        if (subscriber == null) return null;
         return this.modelMapper.map(subscriber, SubscriberDto.class);
     }
     public SubscriberDto getSubscriberByLastName(String lastName) {
-        Subscriber subscriber = subscriberRepository.findOneByLastName(lastName).get();
-        System.out.println(subscriber);
+        Subscriber subscriber = subscriberRepository.findOneByLastName(lastName).orElse(null);
+        if (subscriber == null) return null;
         return this.modelMapper.map(subscriber, SubscriberDto.class);
     }
 
     public SubscriberDto getSubscriberByPhone(String phone) {
-        Subscriber subscriber = subscriberRepository.findOneByPhone(phone).get();
-        System.out.println(subscriber);
+        Subscriber subscriber = subscriberRepository.findOneByPhone(phone).orElse(null);
+        if (subscriber == null) return null;
         return this.modelMapper.map(subscriber, SubscriberDto.class);
     }
 
     public SubscriberDto getSubscriberById(Long subscriberID) {
-        Subscriber subscriber = subscriberRepository.findOneBySubscriberID(subscriberID).get();
+        Subscriber subscriber = subscriberRepository.findOneBySubscriberID(subscriberID).orElse(null);
+        if (subscriber == null) return null;
         return this.modelMapper.map(subscriber, SubscriberDto.class);
     }
     public boolean mailChecker(String mail) {
