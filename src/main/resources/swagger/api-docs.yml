@@ -1,0 +1,190 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /api/subscriber/update:
+    put:
+      tags:
+        - subscriber-controller
+      operationId: unsubscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscriber'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriberDto'
+  /api/unsubscribe:
+    post:
+      tags:
+        - subscriber-controller
+      operationId: unsubscribe_1
+      parameters:
+        - name: mail
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriberDto'
+  /api/subscriber/create:
+    post:
+      tags:
+        - subscriber-controller
+      operationId: createSubscriber
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriberDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Subscriber'
+  /api/subscribers:
+    get:
+      tags:
+        - subscriber-controller
+      operationId: getSubscribers
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubscriberDto'
+  /api/subscriber/get/phone/{phone}:
+    get:
+      tags:
+        - subscriber-controller
+      operationId: getSubscriberByPhone
+      parameters:
+        - name: phone
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriberDto'
+  /api/subscriber/get/mail/{mail}:
+    get:
+      tags:
+        - subscriber-controller
+      operationId: getSubscriberByMail
+      parameters:
+        - name: mail
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriberDto'
+  /api/subscriber/get/lastName/{lastName}:
+    get:
+      tags:
+        - subscriber-controller
+      operationId: getSubscriberByLastName
+      parameters:
+        - name: lastName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriberDto'
+  /api/subscriber/get/firstName/{firstName}:
+    get:
+      tags:
+        - subscriber-controller
+      operationId: getSubscriberByFirstName
+      parameters:
+        - name: firstName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubscriberDto'
+components:
+  schemas:
+    Subscriber:
+      type: object
+      properties:
+        subscriberID:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+          example: "Canal"
+        lastName:
+          type: string
+          example: "Plus"
+        mail:
+          type: string
+        phone:
+          type: string
+        activ:
+          type: boolean
+    SubscriberDto:
+      required:
+        - firstName
+        - lastName
+        - mail
+        - phone
+      type: object
+      properties:
+        firstName:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+          example: "Canal"
+        lastName:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+          example: "Plus"
+        mail:
+          type: string
+        phone:
+          type: string
