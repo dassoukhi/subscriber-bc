@@ -1,0 +1,6 @@
+com/canalPlus/subscriberbc/controller/SubscriberController.class
+com/canalPlus/subscriberbc/model/Subscriber.class
+com/canalPlus/subscriberbc/SubscriberBcApplication.class
+com/canalPlus/subscriberbc/repository/SubscriberRepository.class
+com/canalPlus/subscriberbc/service/SubscriberService.class
+com/canalPlus/subscriberbc/dto/SubscriberDto.class
